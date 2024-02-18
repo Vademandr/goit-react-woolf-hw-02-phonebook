@@ -35,7 +35,7 @@ suitable package, such as [nanoid](https://www.npmjs.com/package/nanoid), to
 generate identifiers. Once this step is done, the application should resemble
 the following.
 
-[Preview](./assets/step-1.png)
+![Preview](./assets/step-1.png)
 
 #### Step 2
 
@@ -65,7 +65,7 @@ Incorporate this input markup for a contact number with integrated validation.
 
 Once this step is done, the application should resemble the following.
 
-[Preview](./assets/step-2.png)
+![Preview](./assets/step-2.png)
 
 #### Step 3
 
@@ -84,7 +84,7 @@ state = {
 };
 ```
 
-[Preview](./assets/step-3.gif)
+![Preview](./assets/step-3.gif)
 
 When developing new functionality, consider hardcoding some data into the state
 for convenience. This eliminates the need to manually enter data in the
@@ -138,11 +138,11 @@ element, and the search filter.
 Prevent users from adding contacts with names already in the phone book. If
 attempted, display a warning `alert`.
 
-[Preview](./assets/step-5.png)
+![Preview](./assets/step-5.png)
 
 #### Step 6
 
 Enhance the application functionality to enable users to delete previously saved
 contacts.
 
-[Preview](./assets/step-6.gif)
+![Preview](./assets/step-6.gif)
