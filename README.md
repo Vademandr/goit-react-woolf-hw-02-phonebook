@@ -1,112 +1,148 @@
-# React homework template
+## Phonebook
 
-Цей проект був створений за допомогою
-[Create React App](https://github.com/facebook/create-react-app). Для знайомства
-і налаштування додаткових можливостей
-[звернися до документації](https://facebook.github.io/create-react-app/docs/getting-started).
+Develop a phone book contact storage application.
 
-## Створення репозиторію за шаблоном
+#### Step 1
 
-Використовуй цей репозиторій організації GoIT як шаблон для створення репозиторію
-свого проєкта. Для цього натисни на кнопку `«Use this template»` і вибери опцію
-`«Create a new repository»`, як показано на зображенні.
+Create an application with a form and a contact list. For this step, focus on
+adding contact names and displaying the contact list. Ensure that the
+application doesn't retain contacts between sessions (page refreshes).
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+Utilize the provided input markup with built-in validation for the contact name.
 
-На наступному кроці відкриється сторінка створення нового репозиторію. Заповни поле
-його імені, переконайся що репозиторій публічний, після чого натисни кнопку
-`«Create repository from template»`.
-
-![Creating repo from a template step 2](./assets/template-step-2.png)
-
-Після того як репозиторій буде створено, необхідно перейти в налаштування
-створеного репозиторію на вкладку `Settings` > `Actions` > `General` як
-показано на зображенні.
-
-![Settings GitHub Actions permissions step 1](./assets/gh-actions-perm-1.png)
-
-Проскроливши сторінку до самого кінця, у секції `«Workflow permissions»` вибери
-опцію `«Read and write permissions»` і постав галочку в чекбоксі. Це
-необхідно для автоматизації процесу деплою проєкту.
-
-![Settings GitHub Actions permissions step 2](./assets/gh-actions-perm-2.png)
-
-Тепер у тебе є особистий репозиторій проекту, зі структурою файлів і папок
-репозиторію-шаблону. Далі працюй із ним як із будь-яким іншим особистим репозиторієм,
-клонуй його собі на комп'ютер, пиши код, роби комміти і відправляй їх на
-GitHub.
-
-## Підготовка до роботи
-
-1. Переконайся що на комп'ютері встановлено LTS-версія Node.js.
-   [Завантаж і встанови](https://nodejs.org/en/) її якщо необхідно.
-2. Встанови базові залежності проєкту командою `npm install`.
-3. Запусти режим розробки, виконавши команду `npm start`.
-4. Перейди в браузері за адресою [http://localhost:3000](http://localhost:3000).
-   Ця сторінка буде автоматично перезавантажуватися після збереження змін у файлах проєкту.
-
-## Деплой
-
-Продакшн версія проєкту буде автоматично проходити лінтинг, збиратися і
-деплоїтися на GitHub Pages, у гілку `gh-pages`, щоразу, коли оновлюється
-гілка `main`. Наприклад, після прямого пушу або прийнятого пул-реквесту. Для цього
-необхідно у файлі `package.json` відредагувати поле `homepage`, замінивши
-`your_username` і `your_repo_name` на свої, і відправити зміни на GitHub.
-
-```json
-"homepage": "https://your_username.github.io/your_repo_name/"
+```html
+<input
+  type="text"
+  name="name"
+  pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+  title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+  required
+/>
 ```
 
-Далі необхідно зайти в налаштування GitHub-репозиторію (`Settings` > `Pages`) і
-виставити роздачу продакшн-версії файлів із папки `/root` гілки `gh-pages`, якщо
-це не було зроблено автоматично.
+The state stored in the parent `<App>` component must adhere to the following
+format, and you cannot introduce new properties.
 
-![GitHub Pages settings](./assets/repo-settings.png)
+```js
+state = {
+  contacts: [],
+  name: '',
+};
+```
 
-### Статус деплоя
+Each contact should be an object with `name` and `id` properties. Use any
+suitable package, such as [nanoid](https://www.npmjs.com/package/nanoid), to
+generate identifiers. Once this step is done, the application should resemble
+the following.
 
-Статус деплою крайнього коміту відображається іконкою біля його ідентифікатора.
+[Preview](./assets/step-1.png)
 
-- **Жовтий колір** - виконується збірка і деплой проєкту.
-- **Зелений колір** - деплой завершився успішно.
-- **Червоний колір** - під час лінтингу, сборки або деплою сталася помилка.
+#### Step 2
 
-Детальнішу інформацію про статус можна подивитися, клікнувши на іконку, і
-у вікні, що випадає, перейти за посиланням `Details`.
+Enhance the application's functionality by enabling users to input phone
+numbers. Include `<input type="tel">` in the form and incorporate a property in
+the state to store its value.
 
-![Deployment status](./assets/deploy-status.png)
+```js
+state = {
+  contacts: [],
+  name: '',
+  number: '',
+};
+```
 
-### Жива сторінка
+Incorporate this input markup for a contact number with integrated validation.
 
-Через якийсь час, зазвичай кілька хвилин, живу сторінку можна буде подивитися
-за адресою, вказаною у відредагованій властивості `homepage`. Наприклад, ось
-посилання на живу версію для цього репозиторію
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
+```html
+<input
+  type="tel"
+  name="number"
+  pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+  title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+  required
+/>
+```
 
-Якщо відкривається порожня сторінка, переконайся, що у вкладці `Console` немає помилок
-пов'язаних із неправильними шляхами до CSS і JS файлів проєкту (**404**). Швидше 
-за все у тебе неправильне значення властивості `homepage` у файлі `package.json`.
+Once this step is done, the application should resemble the following.
 
-### Маршрутизація
+[Preview](./assets/step-2.png)
 
-Якщо додаток використовує бібліотеку `react-router-dom` для маршрутизації,
-необхідно додатково налаштувати компонент `<BrowserRouter>`, передавши у пропе
-`basename` точну назву твого репозиторію. Слеш на початку рядка обов'язковий.
+#### Step 3
+
+Integrate a search field allowing users to filter the contact list by name.
+
+- The search field should be a formless input, and its value should be stored in
+  the state as a controlled element.
+- Ensure that the filtering logic is case-insensitive.
+
+```js
+state = {
+  contacts: [],
+  filter: '',
+  name: '',
+  number: '',
+};
+```
+
+[Preview](./assets/step-3.gif)
+
+When developing new functionality, consider hardcoding some data into the state
+for convenience. This eliminates the need to manually enter data in the
+interface for testing. For instance, you can utilize the following initial
+state.
+
+```js
+state = {
+  contacts: [
+    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+  ],
+  filter: '',
+  name: '',
+  number: '',
+};
+```
+
+#### Step 4
+
+Refactor the application implemented within a single `<App>` component by
+segregating relevant parts into separate components. Restrict the state of the
+`<App>` root component to only include the `contacts` and `filter` properties.
+
+```js
+state = {
+  contacts: [],
+  filter: '',
+};
+```
+
+After refactoring, the root component of the application will include four
+components: the form for adding contacts, the contact list, the contact list
+element, and the search filter.
 
 ```jsx
-<BrowserRouter basename="/your_repo_name">
-  <App />
-</BrowserRouter>
+<div>
+  <h1>Phonebook</h1>
+  <ContactForm ... />
+
+  <h2>Contacts</h2>
+  <Filter ... />
+  <ContactList ... />
+</div>
 ```
 
-## Як це працює
+#### Step 5
 
-![How it works](./assets/how-it-works.png)
+Prevent users from adding contacts with names already in the phone book. If
+attempted, display a warning `alert`.
 
-1. Після кожного пушу в гілку `main` GitHub-репозиторія, запускається спеціальний
-   скрипт (GitHub Action) з файла `.github/workflows/deploy.yml`.
-2. Усі файли репозиторію копіюються на сервер, де проект ініціалізується і
-   проходить лінтинг і збірку перед деплоєм.
-3. Якщо всі кроки пройшли успішно, зібрана продакшн-версія файлів проєкту
-   відправляється в гілку `gh-pages`. В іншому випадку, в лозі виконання
-   скрипта буде вказано в чому проблема.
+[Preview](./assets/step-5.png)
+
+#### Step 6
+
+Enhance the application functionality to enable users to delete previously saved
+contacts.
+
+[Preview](./assets/step-6.gif)
