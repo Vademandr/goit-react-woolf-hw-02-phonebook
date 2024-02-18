@@ -18,6 +18,6 @@ export const FilterInput = styled.input`
   border: 1px solid #000;
   &:hover,
   &:focus {
-    border: 2px solid blue;
+    border: 1px solid blue;
   }
 `;
